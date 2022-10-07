@@ -1,0 +1,33 @@
+.disshow{
+    margin-bottom: 30px;
+    height: 80px;
+    background-color: #5050a8;
+    color: white;
+    margin-top: 100px;
+}
+
+body{
+    justify-content: center;
+    display: grid;
+    background-color: darkgray;
+}
+
+p{
+    position: relative;
+    left: 120px;
+    top: 20px;
+
+}
+
+
+button{
+    color:navy;
+    background-color: navajowhite;
+    width: 100px;
+    padding: 4px;
+}
+
+
+button:hover{
+    background-color: chartreuse;
+}

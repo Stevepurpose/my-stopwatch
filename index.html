@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>my stopwatch</title>
+</head>
+<body>
+    <div class="disshow">
+    <p></p>
+</div>
+<div class="controls">
+    <button id="started">start</button>
+    <button id="stopped">stop</button>
+    <button id="back">reset</button>
+</div>
+<audio src="https://dl.dropbox.com/s/3ipyK9icKvdhrt2/clock-ticking-natural-room-verb-17249.mp3?dl=0" type="audio/mpeg">your browser does not support audio source</audio>
+</body>
+
+<script>
+let controls=document.querySelector(".controls")
+var p=document.querySelector("p")
+var disshow=document.querySelector(".thisshow")
+
+var button=document.querySelector("button")
+var count=0
+var timing;    //for count
+var interval; //for audio
+
+var audio1=new Audio("https://dl.dropbox.com/s/3ipyK9icKvdhrt2/clock-ticking-natural-room-verb-17249.mp3?dl=0")
+
+/*event delegation pattern for adding listeners*/
+controls.addEventListener("click",(e)=>{
+if(e.target.matches("button")){
+    var button=e.target
+
+
+/*listener calls*/
+switch(button){
+ case started:
+start()
+audio1.play()
+break;
+     
+ case stopped:
+ stop()
+ break;
+
+ case back:
+ reset()
+ break;
+
+
+}
+}})
+
+/*listener codes*/
+
+/*start function*/
+function start(){
+interval=setInterval(play,1000) //for tick sound
+function play(){
+audio1.muted=false
+}
+
+$timing=setInterval(()=>{ //for timing motion count
+    count++
+var seconds=count%60    //modulus of a lower number divided by a higher number is the lower number
+var minutes=Math.floor(count/60) //60 seconds make one minute
+var hours=Math.floor(count/3600) //3600 seconds make one hour
+
+if(seconds<10){seconds="0"+seconds}
+if(minutes<10){minutes="0"+minutes}
+if(hours<10){hours="0"+hours}
+
+p.innerHTML=`${hours}:${minutes}:${seconds}`
+
+},1000)
+if(timing!=null){
+    return
+}
+}
+/*stop function*/
+function stop(){
+    clearInterval(interval) //for audio
+    audio1.muted=true
+    clearInterval($timing) //for count
+    timing=null
+}
+
+/*reset function*/
+function reset(){
+    clearInterval(interval) //for audio
+    audio1.muted=true
+  
+    clearInterval($timing) //for count
+    timing=null
+    let count=0
+    p.innerHTML="00:00:00"
+    
+}
+
+
+
+</script>
+</html>
